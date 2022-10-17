@@ -54,13 +54,14 @@ def inference(loader, ssl_model, device ,relic):
 
             # get encoding
             with torch.no_grad():
-                #[TODO] inference
-                
-                #dkcho
-                #h,_,_, _, _, _, _ = ssl_model(x, x, x)
-                
-                #new
-                h= ssl_model(x,x,x, test= True)
+                h,_,_, _, _, _, _ = ssl_model(x, x, x)
+                #online_1,online_2,target_1,target_2, original_features = ssl_model(x, x, x)
+                #print("online1 -- ", online_1.shape)
+                #print("online2 -- ", online_2.shape)
+                #print("target1 -- ", target_1.shape)
+                #print("target2 -- ", target_2.shape)
+                #print("original -- ", original_features.shape)
+                #print("AAAAAAAAAAAA")
                 
 
 

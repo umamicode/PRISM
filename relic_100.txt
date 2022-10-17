@@ -1,0 +1,4 @@
+ReLIC -- True
+Saving Model In -- save/relic/100, Train Epochs: 100
+All Training Args -- Namespace(nodes=1, gpus=1, nr=0, dataparallel=0, workers=8, dataset_dir='./datasets', seed=42, batch_size=128, image_size=224, start_epoch=0, epochs=100, dataset='CIFAR10', test_dataset='STL10', pacs_style='default', pretrain=False, relic=True, relic_normalize=True, relic_temp=1.0, relic_alpha=0.5, resnet='resnet18', projection_dim=64, optimizer='LARS', weight_decay=1e-06, temperature=0.5, model_path='save/relic/100', epoch_num=100, reload=False, logistic_batch_size=256, logistic_epochs=500, device=device(type='cuda', index=0), num_gpus=4, world_size=1)
+Files already downloaded and verified

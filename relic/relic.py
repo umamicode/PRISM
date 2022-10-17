@@ -72,7 +72,7 @@ class ReLIC(nn.Module):
         self.target_network= TargetNetwork(self.encoder, self.n_features, projection_dim)
 
         
-    def forward(self, x_i, x_j, x_orig):
+    def forward(self, x_i, x_j, x_orig, test= False):
         
         '''
         #X_i
@@ -92,15 +92,17 @@ class ReLIC(nn.Module):
 
         return raw_1, raw_2, online_1,online_2,target_1,target_2, original_features
         '''
-        online_1, target_1 = self.online_network(x_i), self.target_network(x_i)
-        online_2, target_2 = self.online_network(x_j), self.target_network(x_j)
-        orig_features = self.online_network(x_orig)
+        if test== False:
+            online_1, target_1 = self.online_network(x_i), self.target_network(x_i)
+            online_2, target_2 = self.online_network(x_j), self.target_network(x_j)
+            orig_features = self.online_network(x_orig)
 
 
-        return online_1,target_1, online_2, target_2, orig_features
+            return online_1,target_1, online_2, target_2, orig_features
 
-
-
+        if test==True:
+            representation= self.encoder(x_i)
+            return representation
 
         '''
         h_i = self.encoder(x_i)

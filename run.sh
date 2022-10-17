@@ -8,7 +8,7 @@ source activate simclr # conda -> source
 
 
 
-python3 main.py > newrelic100_128.txt
+python3 main.py > relic_100.txt
 
 
 
