@@ -33,7 +33,7 @@ weight_decay: 1.0e-6 # "optimized using LARS [...] and weight decay of 10−6"
 temperature: 0.5 # see appendix B.7.: Optimal temperature under different batch sizes
 
 # reload options
-model_path: "save/relic/100" ###KEY###   # set to the directory containing `checkpoint_##.tar` (default: 'save')
+model_path: "save/relic/multi100" ###KEY###   # set to the directory containing `checkpoint_##.tar` (default: 'save')
 epoch_num: 100 ###KEY###  # set to checkpoint number (Default:100)      
 reload: False
 
