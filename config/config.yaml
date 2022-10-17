@@ -1,0 +1,49 @@
+# distributed training
+nodes: 1
+gpus: 1 # I recommend always assigning 1 GPU to 1 node
+nr: 0 # machine nr. in node (0 -- nodes - 1)
+dataparallel: 0 # Use DataParallel instead of DistributedDataParallel
+workers: 8
+dataset_dir: "./datasets"
+
+# train options
+seed: 42 # sacred handles automatic seeding when passed in the config
+batch_size: 128 #Default:128
+image_size: 224
+start_epoch: 0
+epochs: 100 ###KEY###
+dataset: "CIFAR10" ###KEY### # CIFAR10/STL10/PACS
+test_dataset: "STL10" ###KEY###
+pacs_style: "default" #photo/art/cartoon/sketch (default: None == photo)
+pretrain: False 
+
+# relic options
+relic: True  ###KEY### (True/False)
+relic_normalize: True
+relic_temp: 1.0
+relic_alpha: 0.5
+
+# model options
+resnet: "resnet18"
+projection_dim: 64 ###KEY###    # "[...] to project the representation to a 128-dimensional latent space"
+
+# loss options
+optimizer: "LARS" # or Adam/LARS (experimental)
+weight_decay: 1.0e-6 # "optimized using LARS [...] and weight decay of 10−6"
+temperature: 0.5 # see appendix B.7.: Optimal temperature under different batch sizes
+
+# reload options
+model_path: "save/newrelic128" ###KEY###   # set to the directory containing `checkpoint_##.tar` (default: 'save')
+epoch_num: 100 ###KEY###  # set to checkpoint number (Default:100)      
+reload: False
+
+# logistic regression options
+logistic_batch_size: 256
+logistic_epochs: 500
+
+
+
+
+
+
+
