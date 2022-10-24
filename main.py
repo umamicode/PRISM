@@ -25,6 +25,7 @@ from relic import ReLIC
 from relic.modules import ReLIC_Loss, get_resnet
 from relic.modules.transformations import TransformsRelic
 from relic.modules.sync_batchnorm import convert_model
+from relic.modules.gordian_loss import Gordian_Loss
 
 from model import load_optimizer, save_model
 from utils import yaml_config_hook
@@ -42,11 +43,11 @@ DIR_ART = './datasets/PACS/art_painting'
 DIR_CARTOON = './datasets/PACS/cartoon'
 DIR_SKETCH = './datasets/PACS/sketch'
 
-def train(args, train_loader, model, criterion, optimizer, writer, relic=False):
+def train(args, train_loader, model, criterion, criterion2, optimizer, writer):
     loss_epoch = 0
 
     #Vanilla SimCLR
-    if relic==False:  #RELIC
+    if args.relic==False:  #RELIC
         for step, ((x_i, x_j), _) in enumerate(train_loader):
             optimizer.zero_grad()
             x_i = x_i.cuda(non_blocking=True)
@@ -75,7 +76,7 @@ def train(args, train_loader, model, criterion, optimizer, writer, relic=False):
         return loss_epoch
     
     #ReLIC
-    if relic==True:  #RELIC
+    if args.relic==True:  #RELIC
             for step, ((x_i, x_j,x_orig), _) in enumerate(train_loader):
                 optimizer.zero_grad()
                 x_i = x_i.cuda(non_blocking=True)
@@ -91,10 +92,34 @@ def train(args, train_loader, model, criterion, optimizer, writer, relic=False):
 
 
                 loss_1, loss_2 = criterion(online_1, target_2, original_features), criterion(online_2, target_1, original_features)
+                if args.prism== True:
+                    '''
+                    with torch.no_grad():
+                        aug1= model.encoder(x_i)
+                        aug2= model.encoder(x_j)
+                        aug_orig= model.encoder(x_orig)
+                    loss_3= criterion2(aug1,aug2,aug_orig)
+                    
+                     
+                    aug1= model.encoder(x_i)
+                    aug2= model.encoder(x_j)
+                    aug_orig= model.encoder(x_orig)
+                    loss_3= criterion2(aug1,aug2,aug_orig)
+                    '''
+                    #[TODO]
+                    loss_3= criterion2(target_1,target_2,original_features)
+                    
 
-
-
-                loss = loss_1 + loss_2
+                #[TODO]
+                if args.prism==True:
+                    loss= loss_1 + loss_2 + (1/loss_3)
+                    #loss = (loss_1 + loss_2) * (1/loss_3)   #[TODO] ##loss_3(0~1 range)가 커질수록 loss에 도움. 즉 kl-divergence가 maximize 되도록 강제.
+                    '''
+                    loss3 가 kl-divergence of online1/2 우리 이게 커야 한다고 하지 않았나? 그럼 -loss_3를 해줘야 하는거 아닌가? 
+                    target 1/2끼리 해보면?(아닐 것 같긴 함) 아니면 분모로 넣어줘야 하나? kl-divergence range 생각해보기
+                    '''
+                else:
+                    loss = loss_1 + loss_2
                 #loss = criterion(z_i, z_j)
                 loss.backward()
 
@@ -116,7 +141,7 @@ def train(args, train_loader, model, criterion, optimizer, writer, relic=False):
 
 def main(gpu, args):
     ###TEST [TODO- ADDED]
-
+    print("PRISM -- {relic}".format(relic=args.prism))
     print("ReLIC -- {relic}".format(relic=args.relic))
     print("Saving Model In -- {m}, Train Epochs: {e}".format(m= args.model_path, e= args.epochs))
     print("All Training Args --", args)
@@ -246,7 +271,9 @@ def main(gpu, args):
     #[TODO- Added] Add ReLic Loss
     if args.relic==True:   
        criterion = ReLIC_Loss(args.relic_normalize, args.relic_temp, args.relic_alpha)
-
+    
+    #[TODO]
+    criterion2= Gordian_Loss(args.relic_normalize, args.relic_temp, args.relic_alpha)
     # DDP / DP
     if args.dataparallel:
         model = convert_model(model)
@@ -269,7 +296,7 @@ def main(gpu, args):
             train_sampler.set_epoch(epoch)
         
         lr = optimizer.param_groups[0]["lr"]
-        loss_epoch = train(args, train_loader, model, criterion, optimizer, writer, relic=args.relic)
+        loss_epoch = train(args, train_loader, model, criterion,criterion2, optimizer, writer)   #[TODO]- Don't need relic, because args is passed as input  #relic=args.relic
 
         if args.nr == 0 and scheduler:
             scheduler.step()

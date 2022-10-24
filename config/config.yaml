@@ -11,7 +11,7 @@ seed: 42 # sacred handles automatic seeding when passed in the config
 batch_size: 128 #Default:128
 image_size: 224
 start_epoch: 0
-epochs: 100 ###KEY###
+epochs: 30 ###KEY###
 dataset: "CIFAR10" ###KEY### # CIFAR10/STL10/PACS
 test_dataset: "STL10" ###KEY###
 pacs_style: "default" #photo/art/cartoon/sketch (default: None == photo)
@@ -23,9 +23,12 @@ relic_normalize: True
 relic_temp: 1.0
 relic_alpha: 0.5
 
+#PRISM
+prism: True
+
 # model options
 resnet: "resnet18"
-projection_dim: 64 ###KEY###    # "[...] to project the representation to a 128-dimensional latent space"
+projection_dim: 128 ###KEY###    # "[...] to project the representation to a 128-dimensional latent space"
 
 # loss options
 optimizer: "LARS" # or Adam/LARS (experimental)
@@ -33,8 +36,8 @@ weight_decay: 1.0e-6 # "optimized using LARS [...] and weight decay of 10−6"
 temperature: 0.5 # see appendix B.7.: Optimal temperature under different batch sizes
 
 # reload options
-model_path: "save/relic/multi100" ###KEY###   # set to the directory containing `checkpoint_##.tar` (default: 'save')
-epoch_num: 100 ###KEY###  # set to checkpoint number (Default:100)      
+model_path: "save/test/prism3" ###KEY###   # set to the directory containing `checkpoint_##.tar` (default: 'save')
+epoch_num: 30 ###KEY###  # set to checkpoint number (Default:100)      
 reload: False
 
 # logistic regression options
