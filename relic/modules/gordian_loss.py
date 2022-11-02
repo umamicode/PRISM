@@ -52,8 +52,11 @@ class Gordian_Loss(nn.Module):
         logits_jo = torch.mm(zj_norm, zo_norm.t()) / self.temperature
         probs_io = F.softmax(logits_io[torch.logical_not(mask)], -1)
         probs_jo = F.log_softmax(logits_jo[torch.logical_not(mask)], -1)
-        kl_div_loss = F.kl_div(probs_io, probs_jo, log_target=True, reduction="sum")
-       
+        kl_div_loss1 = F.kl_div(probs_io, probs_jo, log_target=True, reduction="sum")
+        kl_div_loss2 = F.kl_div(probs_jo, probs_io, log_target= True, reduction= "sum")
+        kl_div_loss= kl_div_loss1 + kl_div_loss2 #this causes loss to be nan
+        
+        
        #return contrastive_loss + self.alpha * kl_div_loss
         return F.sigmoid(-self.alpha * kl_div_loss)
         

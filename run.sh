@@ -1,5 +1,5 @@
 #!/bin/bash
-python3 main.py > prism_test3.txt
+python3 main.py > ./results/monday_cifar10_sdg.txt
 
 
 

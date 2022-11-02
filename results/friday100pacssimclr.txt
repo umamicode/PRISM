@@ -1,0 +1,15 @@
+PRISM -- False
+ReLIC -- False
+Saving Model In -- save/monday/pacstest, Train Epochs: 100
+All Training Args -- Namespace(nodes=1, gpus=1, nr=0, dataparallel=0, workers=8, dataset_dir='./datasets', seed=42, batch_size=128, image_size=224, start_epoch=0, epochs=100, dataset='PACS', pacs_style='default', test_dataset='PACS', test_pacs_style='default', pretrain=False, relic=False, relic_normalize=True, relic_temp=1.0, relic_alpha=0.5, prism=False, resnet='resnet18', projection_dim=128, optimizer='LARS', weight_decay=1e-06, temperature=0.5, model_path='save/monday/pacstest', epoch_num=100, reload=False, logistic_batch_size=256, logistic_epochs=500, device=device(type='cuda', index=0), num_gpus=4, world_size=1)
+Step [0/13]	 Loss: 5.531337738037109
+Epoch [0/100]	 Loss: 5.516858907846304	 lr: 0.15
+Step [0/13]	 Loss: 5.4356818199157715
+Epoch [1/100]	 Loss: 5.427677594698393	 lr: 0.14996
+Step [0/13]	 Loss: 5.481170177459717
+Epoch [2/100]	 Loss: 5.363473562093882	 lr: 0.14985
+Step [0/13]	 Loss: 5.417891502380371
+Epoch [3/100]	 Loss: 5.29778895011315	 lr: 0.14967
+Step [0/13]	 Loss: 5.2603373527526855
+Epoch [4/100]	 Loss: 5.197775363922119	 lr: 0.14941
+Step [0/13]	 Loss: 5.21240234375

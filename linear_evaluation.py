@@ -22,6 +22,14 @@ from relic.modules.transformations import TransformsRelic
 
 from utils import yaml_config_hook
 
+#PACS Dataset
+NUM_CLASSES = 7      # 7 classes for each domain: 'dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person'
+DATASETS_NAMES = ['photo', 'art', 'cartoon', 'sketch']
+CLASSES_NAMES = ['Dog', 'Elephant', 'Giraffe', 'Guitar', 'Horse', 'House', 'Person']
+DIR_PHOTO = './datasets/PACS/photo'
+DIR_ART = './datasets/PACS/art_painting'
+DIR_CARTOON = './datasets/PACS/cartoon'
+DIR_SKETCH = './datasets/PACS/sketch'
 
 def inference(loader, ssl_model, device ,relic):
     feature_vector = []
@@ -187,6 +195,11 @@ def main(gpu,args):
                 download=True,
                 transform=TransformsSimCLR(size=args.image_size).test_transform,
             )
+        elif args.test_dataset == "PACS":
+            pacs_convertor= {'default':DIR_PHOTO, 'photo':DIR_PHOTO, 'art':DIR_ART, 'cartoon':DIR_CARTOON, 'sketch':DIR_SKETCH}
+            train_dataset= torchvision.datasets.ImageFolder(pacs_convertor[args.test_pacs_style], transform=TransformsSimCLR(size=args.image_size).test_transform)
+            test_dataset = torchvision.datasets.ImageFolder(pacs_convertor[args.test_pacs_style], transform=TransformsSimCLR(size=args.image_size).test_transform)
+                
         else:
             raise NotImplementedError
     
@@ -218,6 +231,11 @@ def main(gpu,args):
                 download=True,
                 transform=TransformsRelic(size=args.image_size).test_transform,
             )
+        elif args.dataset == "PACS":
+                pacs_convertor= {'default':DIR_PHOTO, 'photo':DIR_PHOTO, 'art':DIR_ART, 'cartoon':DIR_CARTOON, 'sketch':DIR_SKETCH}
+                train_dataset= torchvision.datasets.ImageFolder(pacs_convertor[args.test_pacs_style], transform=TransformsRelic(size=args.image_size).test_transform)
+                test_dataset = torchvision.datasets.ImageFolder(pacs_convertor[args.test_pacs_style], transform=TransformsRelic(size=args.image_size).test_transform)
+
         else:
             raise NotImplementedError       
 
