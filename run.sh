@@ -1,5 +1,5 @@
 #!/bin/bash
-python3 main.py > ./results/wednesday_cifar10.txt
+python3 main.py > ./results/1107_test.txt
 
 
 

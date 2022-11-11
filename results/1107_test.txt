@@ -1,0 +1,42 @@
+PRISM -- False
+ReLIC -- False
+Saving Model In -- save/1107/cifar10, Train Epochs: 10
+All Training Args -- Namespace(nodes=1, gpus=1, nr=0, dataparallel=0, workers=8, dataset_dir='./datasets', seed=42, batch_size=128, image_size=224, start_epoch=0, epochs=10, dataset='CIFAR10', pacs_style='default', test_dataset='CIFAR10', test_pacs_style='default', pretrain=False, relic=False, relic_normalize=True, relic_temp=1.0, relic_alpha=0.5, prism=False, resnet='resnet18', projection_dim=128, optimizer='LARS', weight_decay=1e-06, temperature=0.5, model_path='save/1107/cifar10', epoch_num=10, reload=False, logistic_batch_size=256, logistic_epochs=500, device=device(type='cuda', index=0), num_gpus=4, world_size=1)
+Files already downloaded and verified
+Step [0/390]	 Loss: 5.527304172515869
+Step [50/390]	 Loss: 5.250711917877197
+Step [100/390]	 Loss: 5.074727535247803
+Step [150/390]	 Loss: 5.265069007873535
+Step [200/390]	 Loss: 5.078610897064209
+Step [250/390]	 Loss: 5.11902379989624
+Step [300/390]	 Loss: 4.976757049560547
+Step [350/390]	 Loss: 5.062012672424316
+Epoch [0/10]	 Loss: 5.111741431554159	 lr: 0.15
+Step [0/390]	 Loss: 4.964597702026367
+Step [50/390]	 Loss: 4.867570400238037
+Step [100/390]	 Loss: 4.827724933624268
+Step [150/390]	 Loss: 4.855794906616211
+Step [200/390]	 Loss: 4.758902549743652
+Step [250/390]	 Loss: 4.80087423324585
+Step [300/390]	 Loss: 4.765793800354004
+Step [350/390]	 Loss: 4.7605109214782715
+Epoch [1/10]	 Loss: 4.822349400398059	 lr: 0.14633
+Step [0/390]	 Loss: 4.724557876586914
+Step [50/390]	 Loss: 4.83186674118042
+Step [100/390]	 Loss: 4.745771884918213
+Step [150/390]	 Loss: 4.716037273406982
+Step [200/390]	 Loss: 4.699330806732178
+Step [250/390]	 Loss: 4.695086479187012
+Step [300/390]	 Loss: 4.6819305419921875
+Step [350/390]	 Loss: 4.553353786468506
+Epoch [2/10]	 Loss: 4.709731090985811	 lr: 0.13568
+Step [0/390]	 Loss: 4.67114782333374
+Step [50/390]	 Loss: 4.661775588989258
+Step [100/390]	 Loss: 4.67764949798584
+Step [150/390]	 Loss: 4.6328511238098145
+Step [200/390]	 Loss: 4.6274003982543945
+Step [250/390]	 Loss: 4.518698215484619
+Step [300/390]	 Loss: 4.58846378326416
+Step [350/390]	 Loss: 4.639819622039795
+Epoch [3/10]	 Loss: 4.626710891723633	 lr: 0.11908
+Step [0/390]	 Loss: 4.593775749206543
