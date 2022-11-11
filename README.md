@@ -1,5 +1,5 @@
 # PRISM
-PyTorch implementation of PRISM: A Self-Supervised Learning Framework using Causal Mechanism for use in Single Domain Generalization Project. Thanks!
+PyTorch implementation of PRISM: A Self-Supervised Learning Framework using Causal Mechanism for use in Single Domain Generalization Project. TY
 
 Including support for:
 - Distributed data parallel training
